@@ -1,0 +1,1 @@
+export const IS_VAULT_CONFIGURED = !!process.env.VAULT_URL && !!process.env.VAULT_PATH && !!process.env.VAULT_TOKEN;
