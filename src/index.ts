@@ -1,33 +1,59 @@
-import { BatchModule } from './modules/batch.module';
-import { Handler } from 'aws-lambda';
-import { INestApplication } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import { QCHistoryService } from './services/qc-history.service';
+// import { BatchModule } from './modules/batch.module';
+// import { Handler } from 'aws-lambda';
+// import { INestApplication } from '@nestjs/common';
+// import { NestFactory } from '@nestjs/core';
+// import { QCHistoryService } from './services/qc-history.service';
+// import { ExpressAdapter } from '@nestjs/platform-express'
+// import express from 'express'
+
+// const initialApp = async (expressInstance: any): Promise<INestApplication> => {
+
+// 	const app = await NestFactory.create(BatchModule, new ExpressAdapter(expressInstance))
+// 	return app;
+// };
+
+// export const QCHistory: Handler = async (event: any): Promise<any> => {
+
+//     const server = express()
+
+// 	console.log(`#main delete qc history start`);
+// 	const app = await initialApp(server)
+	
+// 	const qcHistory = app.get(QCHistoryService)
+
+// 	const changeDate = new Date().setDate(new Date().getDate() - 7)
+// 	const limitDate = new Date(changeDate)
+// 	console.log(`limit date ${limitDate}`)
+
+// 	await qcHistory.deleteQCHistoryById(limitDate)
+
+// 	console.log('#main delete qc history end')
+// 	await app.close();
+// 	return true;
+// }
+
+import { NestFactory } from '@nestjs/core'
 import { ExpressAdapter } from '@nestjs/platform-express'
 import express from 'express'
 
-const initialApp = async (expressInstance: any): Promise<INestApplication> => {
 
-	const app = await NestFactory.create(BatchModule, new ExpressAdapter(expressInstance))
-	return app;
-};
-
-export const QCHistory: Handler = async (event: any): Promise<any> => {
+export const helloWorld = (event: any, context: any) => {
+    const message = event.data || null
 
     const server = express()
 
-	console.log(`#main delete qc history start`);
-	const app = await initialApp(server)
-	
-	const qcHistory = app.get(QCHistoryService)
+    class AppModule {}
 
-	const changeDate = new Date().setDate(new Date().getDate() - 7)
-	const limitDate = new Date(changeDate)
-	console.log(`limit date ${limitDate}`)
+    console.log(message)
 
-	await qcHistory.deleteQCHistoryById(limitDate)
+    const createNestServer = async (expressInstance) => {
+        const app = await NestFactory.create(AppModule, new ExpressAdapter(expressInstance))
+        return app.init()
+    }
 
-	console.log('#main delete qc history end')
-	await app.close();
-	return true;
+    createNestServer(server)
+    .then((v) => {
+        console.log(message)
+        console.log('running....')
+    })
 }
