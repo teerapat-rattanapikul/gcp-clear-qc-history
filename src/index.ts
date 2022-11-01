@@ -6,7 +6,7 @@ import { QCHistoryService } from './services/qc-history.service';
 import { ExpressAdapter } from '@nestjs/platform-express'
 import express from 'express'
 
-export const initialApp = async (expressInstance: any): Promise<INestApplication> => {
+const initialApp = async (expressInstance: any): Promise<INestApplication> => {
 
 	const app = await NestFactory.create(BatchModule, new ExpressAdapter(expressInstance))
 	return app;

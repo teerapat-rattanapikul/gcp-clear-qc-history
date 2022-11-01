@@ -6,8 +6,7 @@
   "private": true,
   "license": "WTFPL",
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "start": "ts-node src/index"
+    "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
     "@nestjs/common": "^9.1.6",
