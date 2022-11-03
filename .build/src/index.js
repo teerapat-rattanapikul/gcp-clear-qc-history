@@ -1,27 +1,24 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.helloWorld = void 0;
+exports.QCHistory = void 0;
+const batch_module_1 = require("./modules/batch.module");
 const core_1 = require("@nestjs/core");
-const platform_express_1 = require("@nestjs/platform-express");
-const express_1 = __importDefault(require("express"));
-const helloWorld = (event, context) => {
-    const message = event.data || null;
-    const server = (0, express_1.default)();
-    class AppModule {
-    }
-    console.log(message);
-    const createNestServer = async (expressInstance) => {
-        const app = await core_1.NestFactory.create(AppModule, new platform_express_1.ExpressAdapter(expressInstance));
-        return app.init();
-    };
-    createNestServer(server)
-        .then((v) => {
-        console.log(message);
-        console.log('running....');
-    });
+const qc_history_service_1 = require("./services/qc-history.service");
+const initialApp = async () => {
+    const app = await core_1.NestFactory.create(batch_module_1.BatchModule);
+    return app;
 };
-exports.helloWorld = helloWorld;
+const QCHistory = async (event) => {
+    console.log(`#main delete qc history start`);
+    const app = await initialApp();
+    const qcHistory = app.get(qc_history_service_1.QCHistoryService);
+    const changeDate = new Date().setDate(new Date().getDate() - 7);
+    const limitDate = new Date(changeDate);
+    console.log(`limit date ${limitDate}`);
+    await qcHistory.deleteQCHistoryById(limitDate);
+    console.log('#main delete qc history end');
+    await app.close();
+    return true;
+};
+exports.QCHistory = QCHistory;
 //# sourceMappingURL=index.js.map

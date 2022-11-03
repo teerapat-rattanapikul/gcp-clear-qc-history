@@ -1,1 +1,2 @@
-export declare const helloWorld: (event: any, context: any) => void;
+import { Handler } from 'aws-lambda';
+export declare const QCHistory: Handler;

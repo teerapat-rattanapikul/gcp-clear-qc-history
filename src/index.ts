@@ -1,59 +1,30 @@
-// import { BatchModule } from './modules/batch.module';
-// import { Handler } from 'aws-lambda';
-// import { INestApplication } from '@nestjs/common';
-// import { NestFactory } from '@nestjs/core';
-// import { QCHistoryService } from './services/qc-history.service';
-// import { ExpressAdapter } from '@nestjs/platform-express'
-// import express from 'express'
+import { BatchModule } from './modules/batch.module';
+import { Handler } from 'aws-lambda';
+import { INestApplication } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { QCHistoryService } from './services/qc-history.service';
 
-// const initialApp = async (expressInstance: any): Promise<INestApplication> => {
+const initialApp = async (): Promise<INestApplication> => {
 
-// 	const app = await NestFactory.create(BatchModule, new ExpressAdapter(expressInstance))
-// 	return app;
-// };
+	const app = await NestFactory.create(BatchModule)
+	return app;
+};
 
-// export const QCHistory: Handler = async (event: any): Promise<any> => {
+export const QCHistory: Handler = async (event: any): Promise<any> => {
 
-//     const server = express()
-
-// 	console.log(`#main delete qc history start`);
-// 	const app = await initialApp(server)
+	console.log(`#main delete qc history start`);
+	const app = await initialApp()
 	
-// 	const qcHistory = app.get(QCHistoryService)
+	const qcHistory = app.get(QCHistoryService)
 
-// 	const changeDate = new Date().setDate(new Date().getDate() - 7)
-// 	const limitDate = new Date(changeDate)
-// 	console.log(`limit date ${limitDate}`)
+	const changeDate = new Date().setDate(new Date().getDate() - 7)
+	const limitDate = new Date(changeDate)
+	console.log(`limit date ${limitDate}`)
 
-// 	await qcHistory.deleteQCHistoryById(limitDate)
+	await qcHistory.deleteQCHistoryById(limitDate)
 
-// 	console.log('#main delete qc history end')
-// 	await app.close();
-// 	return true;
-// }
-
-import { NestFactory } from '@nestjs/core'
-import { ExpressAdapter } from '@nestjs/platform-express'
-import express from 'express'
-
-
-export const helloWorld = (event: any, context: any) => {
-    const message = event.data || null
-
-    const server = express()
-
-    class AppModule {}
-
-    console.log(message)
-
-    const createNestServer = async (expressInstance) => {
-        const app = await NestFactory.create(AppModule, new ExpressAdapter(expressInstance))
-        return app.init()
-    }
-
-    createNestServer(server)
-    .then((v) => {
-        console.log(message)
-        console.log('running....')
-    })
+	console.log('#main delete qc history end')
+	await app.close();
+	return true;
 }
+
