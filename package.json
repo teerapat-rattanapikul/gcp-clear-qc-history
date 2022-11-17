@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc -p tsconfig.json",
+    "start": "ts-node src/index.ts"
   },
   "dependencies": {
     "@nestjs/common": "^9.1.6",

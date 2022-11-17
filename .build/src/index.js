@@ -12,7 +12,7 @@ const QCHistory = async (event) => {
     console.log(`#main delete qc history start`);
     const app = await initialApp();
     const qcHistory = app.get(qc_history_service_1.QCHistoryService);
-    const changeDate = new Date().setDate(new Date().getDate() - 7);
+    const changeDate = new Date(new Date().setDate(new Date().getDate() - 7)).setHours(new Date().getHours() + 7);
     const limitDate = new Date(changeDate);
     console.log(`limit date ${limitDate}`);
     await qcHistory.deleteQCHistoryById(limitDate);
@@ -21,4 +21,5 @@ const QCHistory = async (event) => {
     return true;
 };
 exports.QCHistory = QCHistory;
+(0, exports.QCHistory)();
 //# sourceMappingURL=index.js.map

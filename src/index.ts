@@ -18,7 +18,7 @@ export const QCHistory: Handler = async (event: any): Promise<any> => {
 	
 	const qcHistory = app.get(QCHistoryService)
 
-	const changeDate = new Date().setDate(new Date().getDate() - 7)
+	const changeDate = new Date(new Date().setDate(new Date().getDate() - 7)).setHours(new Date().getHours()+7)
 	const limitDate = new Date(changeDate)
 	console.log(`limit date ${limitDate}`)
 
@@ -28,4 +28,6 @@ export const QCHistory: Handler = async (event: any): Promise<any> => {
 	await app.close();
 	return true;
 }
+
+QCHistory()
 
