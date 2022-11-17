@@ -28,6 +28,3 @@ export const QCHistory: Handler = async (event: any): Promise<any> => {
 	await app.close();
 	return true;
 }
-
-QCHistory()
-

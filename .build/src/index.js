@@ -21,5 +21,4 @@ const QCHistory = async (event) => {
     return true;
 };
 exports.QCHistory = QCHistory;
-(0, exports.QCHistory)();
 //# sourceMappingURL=index.js.map
