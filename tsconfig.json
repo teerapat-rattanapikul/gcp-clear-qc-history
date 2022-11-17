@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "charset": "utf8",
     "declaration": true,
     "noImplicitAny": false,
     "removeComments": true,
@@ -12,11 +13,18 @@
     "strictNullChecks": true,
     "sourceMap": true,
     "moduleResolution": "Node",
-    "target": "es2017",
+    "target": "es2018",
     "outDir": ".build",
     "rootDir": "./",
     "baseUrl": "./",
-    "esModuleInterop":true
+    "esModuleInterop":true,
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": true
   },
   "ts-node": {
     "esm": true
@@ -27,5 +35,9 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "buildOnSave": false,
+  "typeRoots": [
+    "node_modules/@types"
+],
 }

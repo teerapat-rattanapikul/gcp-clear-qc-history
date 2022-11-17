@@ -3,10 +3,11 @@ import { Handler } from 'aws-lambda';
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { QCHistoryService } from './services/qc-history.service';
+import { NestExpressApplication } from '@nestjs/platform-express'
 
 const initialApp = async (): Promise<INestApplication> => {
 
-	const app = await NestFactory.create(BatchModule)
+	const app = await NestFactory.create<NestExpressApplication>(BatchModule)
 	return app;
 };
 
